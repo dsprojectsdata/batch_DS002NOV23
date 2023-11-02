@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Create Elements</title>
+</head>
+<body>
+    <!-- <h1 class="main-heading">Debugger Solutions</h1> -->
+    <!-- <ul class="list-items">
+        <li>React JS</li>
+        <li>PHP</li>
+        <li>HTML</li>
+        <li>CSS</li>
+    </ul> -->
+    
+<script>
+
+    // // const h1Element = document.createElement("h1");
+    // // h1Element.className = "main-heading";
+    // // h1Element.id = "main-id";
+    // // h1Element.style.color = "red";
+    // // h1Element.innerHTML = "Debugger Solutions";
+
+    // // document.body.append(h1Element);
+    // // document.body.prepend(h1Element);
+
+    const ulList = document.createElement("ul");
+    ulList.className = "list-items";
+
+    
+    const firstLi = document.createElement("li");
+    firstLi.innerHTML = "React JS";
+    firstLi.id = "react-course";
+    ulList.append(firstLi);
+
+    const secondLi = document.createElement("li");
+    secondLi.innerHTML = "PHP";
+    ulList.append(secondLi);
+
+    const thirdLi = document.createElement("li");
+    thirdLi.innerHTML = "HTML";
+    ulList.append(thirdLi);
+
+    const fourthLi = document.createElement("li");
+    fourthLi.innerHTML = "CSS";
+    ulList.append(fourthLi);
+    
+    document.body.prepend(ulList);
+
+    // Edit 
+
+    const ulElement = document.getElementsByClassName("list-items")[0];
+
+    const firstElement =  ulElement.firstChild;
+    firstElement.innerHTML = "NIKHILESH SHARMA";
+    firstElement.style.backgroundColor = "black";
+    firstElement.style.color = "#FFFFFF";
+
+    // firstElement.outerHTML = "<li class='outer-html-test'></li>";
+    // firstElement.outerHTML = "<p class='outer-html-test'>Outer P Tag</p>";
+
+    // console.log(firstElement.innerHTML);
+
+    // Delete a Element
+    // document.getElementById("react-course").remove();
+
+</script>
+
+</body>
+</html>

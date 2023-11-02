@@ -23,5 +23,36 @@
 
     // const headingConst = document.querySelectorAll("h1");
 
+    // Start on 2Nov
+
+    /*
+        Parent Child Relationship
+    */
+
+    const courseElemet =  document.getElementById("course-data");
+
+    // Get children
+
+    const allChildren = courseElemet.children;
+    // const allChildNodes = courseElemet.childNodes; -> To get Nodelist
+    // console.log(allChildren);
+
+    // const firstChild = allChildren[0]
+    // const firstNodeChild = courseElemet.firstChild;
+    const firstChild = courseElemet.firstElementChild;
+
+    const nextChild = firstChild.nextElementSibling;
+
+    // console.log(firstChild);
+    // console.log(nextChild);
+
+    // Get Parent
+    // const getParentOfNextChild = nextChild.parentElement;
+
+    // console.log(getParentOfNextChild);
+
+    console.log(document.getElementById("main-heading2").parentElement);
+
+
 </script>
 </html>
