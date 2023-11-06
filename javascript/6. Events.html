@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            padding: 20px;
+        }
+        #images{
+            display: flex;
+            gap: 50px;
+        }
+        #images img{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- <button id="btn" onclick="btnclick()" onmousedown="fn()">Click Here</button> -->
+    <!-- <button id="btn">Click Here</button> -->
+
+    <!-- <div id="images">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1150px-React-icon.svg.png" alt="React Icon">
+
+        <img src="https://cdn0.iconfinder.com/data/icons/social-network-9/50/22-512.png" alt="">
+    </div> -->
+
+    <!-- <a href="https://debuggersolutions.com/" id="linkTag">Debugger Solutions</a> -->
+
+    <!-- <form id="dsForm" action="https://debuggersolutions.com/">
+        <input type="text">
+        <input type="submit">
+    </form> -->
+    
+    <script>
+        // First method
+
+        // function btnClick(){
+        //     alert();
+        // }
+
+        // Second Method
+
+        // document.getElementById("btn").onclick = function(e){
+        //     console.log("onclick method");
+        //     // console.log(e);
+        // }
+
+        // document.getElementById("btn").onclick = function(e){
+        //     console.log("onclick method again");
+        //     // console.log(e);
+        // }
+
+        // Third Method
+
+        // document.getElementById("btn").addEventListener("click", function(){
+        //     console.log("addeventlistener method");
+        // }, false);
+
+        // document.getElementById("btn").addEventListener("click", function(){
+        //     console.log("addeventlistener method again");
+        // }, false);
+
+        // Event propogation -> 1. Event bubbling 2. Event capturing
+
+        // const imgIcons = document.querySelectorAll("img");
+        // imgIcons.forEach(function(img){
+        //     img.addEventListener("click", function(event){
+        //         console.log("click on any icon >>", event.target)
+        //         // event.stopPropagation();
+        //     })
+        // })
+
+        // document.getElementById("images").addEventListener("click", function(){
+        //     console.log("click on images")
+        // });
+
+        // Prevent Default
+
+        // document.getElementById("linkTag").addEventListener("click", function(event){
+        //     console.log("Am I here?", event);
+        //     event.preventDefault();
+        // });
+
+        // document.getElementById("dsForm").addEventListener("submit", function(event){
+        //     console.log("Is submit??", event);
+        //     event.preventDefault();
+        // });
+
+        // TASK - type, timestamp, target, toElement, srcElement, currentTarget,
+        // TASK - clientX, clientY, screenX, screenY, keyName, keyCode, altKey, ctrlKey, shiftKey
+
+    </script>
+</body>
+</html>
