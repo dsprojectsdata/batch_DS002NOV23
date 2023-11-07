@@ -41,15 +41,17 @@
                     <button type="button" id="add-to-do-btn" class="col-4 btn btn-primary mb-2 ml-2">Add todo</button>
                 </div>
                 <div class="row" id="todo-container">
+
                     <!-- <div class="col col-12 p-2 todo-item" todo-id="0">
                         <div class="input-group">
                             <input type="text" readonly="" class="form-control false "
                                 aria-label="Text input with checkbox" value="take out the trash">
                             <div class="input-group-append">
-                                <button todo-id="0" class="btn btn-outline-secondary bg-danger text-white" type="button" id="button-addon2 ">X</button>
+                                <button todo-id="0" class="btn btn-outline-secondary bg-danger text-white delete-add-todo-btn" type="button" id="button-addon2 ">X</button>
                             </div>
                         </div>
                     </div> -->
+                    
                 </div>
             </div>
         </div>
@@ -64,9 +66,9 @@
         const addToDoBtn = document.getElementById("add-to-do-btn");
         const inputText = document.getElementById("todo-input");
         const toDoContainer = document.getElementById("todo-container");
+        const deleteBtns = document.getElementsByClassName("delete-add-todo-btn");
 
         addToDoBtn.addEventListener("click", function(event){
-            // console.log("Am I clicked??");
             const toDoText = inputText.value;
             if(toDoText !== ""){
                 const toDoHTML = `<div class="col col-12 p-2 todo-item" todo-id="0">
@@ -74,16 +76,40 @@
                             <input type="text" readonly="" class="form-control false "
                                 aria-label="Text input with checkbox" value="${toDoText}">
                             <div class="input-group-append">
-                                <button todo-id="0" class="btn btn-outline-secondary bg-danger text-white" type="button" id="button-addon2 ">X</button>
+                                <button todo-id="0" class="btn btn-outline-secondary bg-danger text-white delete-add-todo-btn" type="button">X</button>
                             </div>
                         </div>
                     </div>`;
             
                 toDoContainer.innerHTML = toDoContainer.innerHTML + toDoHTML;
+                inputText.value = "";
             }else{
                 alert("Please add some value in input")
             }
+        });
+
+        // Array.from(deleteBtns).forEach((btn) => {
+        //     btn.addEventListener("click", () => {
+        //         console.log("AM I clicked on delete button");
+        //     })
+        // })
+
+        // console.log("deleteBtns >>", deleteBtns);
+
+        // Event Delegation
+
+        toDoContainer.addEventListener("click", (event) => {
+            // console.log();
+            if(event.target.classList.contains("delete-add-todo-btn")){
+                const isConfirm = confirm("Are you sure you want to delete?");
+                if(isConfirm){
+                    event.target.closest(".todo-item").remove();
+                }
+            }
         })
+
+        // Difference between "target" and "currentTarget"
+        
 
     </script>
     

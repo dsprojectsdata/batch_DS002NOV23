@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- <button id="btn">Click ME</button> -->
+
+    <h1 id="time"></h1>
+
+    <script>
+
+        // document.getElementById("btn").addEventListener("click", () => {
+        //     // console.log(Math);
+        // })
+
+        // let a = 1;
+        // let b = 2;
+        
+        // const output = a++ + ++b + a++;
+
+        // console.log("output >>", output, a, b);
+        // 6
+        // 7
+        // Async, await, fetch, axios, 
+
+        // const dateTime = new Date();
+        // // document.getElementById("time").innerHTML = dateTime;
+        // // console.log("dateTime >>", dateTime.getHours(), dateTime.getMinutes(), dateTime.getSeconds())
+
+        // const timeHTML = `${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
+
+        // document.getElementById("time").innerHTML = timeHTML;
+
+        const getFullTime = () => {
+            const dateTime = new Date();
+
+            const timeHTML = `${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
+
+            document.getElementById("time").innerHTML = timeHTML;            
+        }
+
+        getFullTime();
+
+        setInterval(() => {
+            
+            // const dateTime = new Date();
+            // document.getElementById("time").innerHTML = dateTime;
+
+            // const dateTime = new Date();
+            
+            // const timeHTML = `${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
+
+            // document.getElementById("time").innerHTML = timeHTML;
+            getFullTime();
+        }, 1000);
+
+    </script>
+</body>
+</html>
