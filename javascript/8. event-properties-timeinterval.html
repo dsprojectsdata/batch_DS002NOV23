@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,14 +12,16 @@
 
     <h1 id="time"></h1>
 
+    <button id="stop-time">Stop Time</button>
+
     <script>
 
         // document.getElementById("btn").addEventListener("click", () => {
         //     // console.log(Math);
         // })
 
-        // let a = 1;
-        // let b = 2;
+        let a = 1;
+        let b = 2;
         
         // const output = a++ + ++b + a++;
 
@@ -46,7 +48,7 @@
 
         getFullTime();
 
-        setInterval(() => {
+        const timeInterval = setInterval(() => {
             
             // const dateTime = new Date();
             // document.getElementById("time").innerHTML = dateTime;
@@ -58,6 +60,11 @@
             // document.getElementById("time").innerHTML = timeHTML;
             getFullTime();
         }, 1000);
+
+        document.getElementById("stop-time").addEventListener("click", () => {
+            console.log("Clicked on stop btn");
+            clearInterval(timeInterval);
+        })
 
     </script>
 </body>
