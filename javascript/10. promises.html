@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        // PROMISES
+
+        // .then, .catch
+        // async, await
+
+        // Promises does not give result immediately, but in some time
+        // It is an asynchronous operation
+
+        // Three state -> pending, fulfilled, rejected
+
+        // const getUserData = () => {
+        //     const abcd = fetch("https://dummyjson.com/users").then((response) => {
+        //         return response.json();
+        //     }).then((jsonRes) => {
+        //         console.log("jsonRes >>", jsonRes);
+
+        //         jsonRes.users.forEach(element => {
+        //             // console.log(element);
+
+        //             const ulElement = document.querySelector("ul");
+
+        //             const liHTML = `<li>${element.firstName} ${element.lastName}</li>`;
+
+        //             ulElement.innerHTML = ulElement.innerHTML + liHTML;
+        //         });
+
+        //     });
+        //     // console.log("response >>", response);
+        // };
+
+        // getUserData();
+
+        // const promiseOne = new Promise(function(resolve, reject) {
+        //     setTimeout(() => {
+        //         console.log("promiseOne executed");
+        //         resolve();
+        //     }, 2000)
+        // });
+
+        // promiseOne.then(() => {
+        //     console.log("promiseOne here")
+        // })
+
+
+        // new Promise(function(resolve, reject) {
+        //     setTimeout(() => {
+        //         console.log("promiseOne executed");
+        //         resolve();
+        //     }, 2000)
+        // }).then(() => {
+        //     console.log("promiseOne here");
+        // });
+
+        // const promiseThree = new Promise(function(resolve, reject) {
+        //     setTimeout(() => {
+        //         console.log("promiseOne executed");
+        //         resolve({ usename: "nikhilesh", language: "en"});
+        //     }, 2000)
+        // })
+        
+        // promiseThree.then((response) => {
+        //     console.log("promiseOne here", response);
+        // });
+
+        // const promiseFour = new Promise(function(resolve, reject) {
+        //     setTimeout(() => {
+        //         console.log("promiseOne executed");
+        //         // resolve({ usename: "nikhilesh", language: "en"});
+        //         reject({ status: "error" })
+        //     }, 2000)
+        // })
+        
+        // promiseFour.then((response) => {
+        //     console.log("promiseOne here", response);
+        // }).catch((err) => {
+        //     console.log("err >>", err);
+        // });
+
+        // const promiseFive = new Promise(function(resolve, reject) {
+        //     setTimeout(() => {
+        //         const isSuccess = false;
+        //         if(isSuccess){
+        //             resolve({ usename: "nikhilesh", language: "en"});
+        //         }else{
+        //             reject({ status: "error", errorCode: 500 });
+        //         }
+        //     }, 2000)
+        // })
+        
+        // promiseFive.then((response) => {
+        //     console.log("promiseOne here", response);
+        // }).catch((err) => {
+        //     console.log("err >>", err);
+        // });
+
+
+        const promiseSix = new Promise(function(resolve, reject) {
+            setTimeout(() => {
+                const isSuccess = false;
+                if(isSuccess){
+                    resolve({ usename: "nikhilesh", language: "en"});
+                }else{
+                    reject({ status: "error", errorCode: 500 });
+                }
+            }, 2000)
+        });
+
+        const executePromiseSix = async () => {
+
+            try {
+                const response = await promiseSix;
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        executePromiseSix();
+
+
+        // 
+        // TO DO List => Edit
+        // TASK => Promise, then and catch, async and await
+
+    </script>
+
+</body>
+</html>
