@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        // PROMISES
+
+        // .then, .catch
+        // async, await
+
+        // Why we promises
+
+        // To avoid callback function channings, callback hell or pyramid of dooms
+        // for error handling
+        // Readibility
+
+        // EXAMPLE FIRST
+
+        // console.log("initial");
+
+        // for (let index = 0; index < 3e9; index++) {}
+        // // 3e9 => 3x10(power)9
+
+        // console.log("end");
+
+        // EXAMPLE SECOND
+
+        // console.log("initial");
+
+        // setTimeout(() => {
+        //     console.log("settimeout here");
+        //     // return "output";
+        // }, 1000);
+
+        // console.log("end");
+
+        // setTimeout, setTimeinterval, event, fetch
+
+        // console.log("result >>", result);
+
+        // EXAMPLE THIRD - Call back function
+
+        // console.log("initial");
+
+        // setTimeout(() => {});
+
+        // function callFn(resultFn, a, b){
+        //     setTimeout(() => {
+        //         // const a = 10;
+        //         // const b = 20;
+        //         // console.log(resultFn());
+        //         const c = a + b;
+        //         if(c === 30){
+        //             resultFn(null, c);
+        //         }else{
+        //             resultFn("Something went wrong", null)
+        //         }
+        //         // console.log("c >>", c);
+        //     }, 2000);
+        // }
+
+        // callFn((error, data) => {
+        //     console.log("error", error);
+        //     console.log("data", data);
+        //     return 100;
+        // }, 10, 25);
+
+        // console.log("end");
+
+        // FOURTH EXAMPLE - callback hell
+
+        // function callbackFn(callback, a){
+        //     setTimeout(() => {
+        //         const c = a + 5;
+        //         callback(null, c);
+        //         // console.log("output >>", c);
+        //     }, 2000);
+        // }
+
+        // function callbackFn2(callback, b){
+        //     setTimeout(() => {
+        //         const c = b * 2;
+        //         callback(null, c);
+        //         // console.log("output >>", c);
+        //     }, 2000);
+        // }
+
+        // callbackFn((error, output1) => {
+        //     console.log("First output", output1);
+        //     // Second function
+        //     callbackFn((error, output2) => {
+        //         console.log("second output", output2);
+        //         // Third function
+        //         callbackFn2((error, output3) => { 
+        //             console.log("third output", output3);
+        //         }, output2);
+
+        //     }, output1)
+
+        // }, 5);
+
+        // Create a promise 
+
+        // const promiseFn = (a, b) => new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         const c = a + b;
+        //         // resolve({ data: c });
+        //         reject({ error: "Something went wrong" })
+        //     }, 2000);
+        // });
+
+        // // Consume/use a promise
+        // promiseFn(10, 35).then((data) => {
+        //     console.log("data >>",data);
+        // }).catch((error) => {
+        //     console.log("error >>", error);
+        // });
+
+        const promiseFn = (a) => new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const c = a + 10;
+                resolve({ data: c });
+                // reject({ error: "Something went wrong" })
+            }, 2000);
+        });
+
+        const promiseFn2 = (b) => new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const c = b * 5;
+                resolve({ data: c });
+                // reject({ error: "Something went wrong" })
+            }, 2000);
+        });
+
+        // Consume/use a promise
+        // promiseFn(10)
+        // .then((output1) => {
+        //     console.log("output1 >> ",output1);
+        //     return promiseFn(output1.data);
+        // })
+        // .then((output2) => {
+        //     console.log("output2 >> ",output2);
+        //     return promiseFn2(output2.data);
+        // })
+        // .then((output3) => {
+        //     console.log("output3 >> ", output3);
+        // });
+
+        // fetch / async await / 
+
+    </script>
+
+</body>
+</html>

@@ -20,25 +20,25 @@
 
         // Three state -> pending, fulfilled, rejected
 
-        // const getUserData = () => {
-        //     const abcd = fetch("https://dummyjson.com/users").then((response) => {
-        //         return response.json();
-        //     }).then((jsonRes) => {
-        //         console.log("jsonRes >>", jsonRes);
+        const getUserData = () => {
+            const abcd = fetch("https://dummyjson.com/users").then((response) => {
+                return response.json();
+            }).then((jsonRes) => {
+                console.log("jsonRes >>", jsonRes);
 
-        //         jsonRes.users.forEach(element => {
-        //             // console.log(element);
+                jsonRes.users.forEach(element => {
+                    // console.log(element);
 
-        //             const ulElement = document.querySelector("ul");
+                    const ulElement = document.querySelector("ul");
 
-        //             const liHTML = `<li>${element.firstName} ${element.lastName}</li>`;
+                    const liHTML = `<li>${element.firstName} ${element.lastName}</li>`;
 
-        //             ulElement.innerHTML = ulElement.innerHTML + liHTML;
-        //         });
+                    ulElement.innerHTML = ulElement.innerHTML + liHTML;
+                });
 
-        //     });
-        //     // console.log("response >>", response);
-        // };
+            });
+            // console.log("response >>", response);
+        };
 
         // getUserData();
 
@@ -118,7 +118,6 @@
         });
 
         const executePromiseSix = async () => {
-
             try {
                 const response = await promiseSix;
             } catch (error) {
