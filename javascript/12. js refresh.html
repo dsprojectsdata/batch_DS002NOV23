@@ -62,7 +62,7 @@
         - fat arrow function: () => {}
         - template literals: `${}`
         - default parameters: (a=10) => {}
-        - spread operator and reset: (pass by value and pass by reference)
+        - spread operator and rest: (pass by value and pass by reference)
         - destructuring: [a,b,c] = [1,2,3,4,5]
         - classes
         - modules
@@ -107,18 +107,53 @@
 
         // console.log(a, b);
 
+        // let obj1 = {
+        //     name: "Nikhilesh",
+        //     age: 10
+        // };
+
+        // let obj2 = obj1;
+
+        // obj1.name = "Debugger Solutions";
+
+        // console.log("obj1", obj1);
+        // console.log("obj2", obj2);
+
+        // SPREAD OPERATOR AND REST
+
+        // const arr = [1,2,3,4,5,6,7,8,9,10];
+
+        // const secondArr = [];
+        // secondArr[0] = arr[0];
+        // secondArr[1] = arr[1];
+        // secondArr[2] = arr[2];
         
-        let obj1 = {
-            name: "Nikhilesh",
-            age: 10
-        };
+        // secondArr[2] = 15;
+        
+        // const secondArr = [...arr, 11, 12, 13];
 
-        let obj2 = obj1;
+        // secondArr[0] = 15;
+        
+        // console.log("secondArr >>", secondArr);
+        // console.log("arr >>", arr);
 
-        obj1.name = "Debugger Solutions";
+        // const obj1 = {
+        //     name: "Debugger Solutions",
+        //     location: "Jaipur"
+        // };
 
-        console.log("obj1", obj1);
-        console.log("obj2", obj2);
+        // const obj2 = {...obj1, services: "Web, app"};
+
+        // obj2["name"] = "DS";
+
+        // console.log("obj1 >>", obj1);
+        // console.log("obj2 >>", obj2);
+
+        function commonFn(a, b, c, ...args) {
+            console.log(a, b, c, args);
+        }
+
+        commonFn(1,2,3,4,5,6,7);
 
     </script>
 </body>
