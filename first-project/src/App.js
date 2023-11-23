@@ -1,8 +1,10 @@
-import Component from "./Component";
+// import Component from "./JSXStudy";
+// import UseCSS from "./UseCSS";
+import IncDec from "./firstTask/IncDec";
 
 const App = () => {
     return (
-        <Component />
+        <IncDec />
     )
 }
 
