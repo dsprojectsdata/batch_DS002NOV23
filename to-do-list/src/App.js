@@ -5,20 +5,32 @@ import './App.css';
 
 function App() {
 
-	const [toDoList, setToDoList] = useState([]);
+	const [toDoList, setToDoList] = useState([
+		{
+			id: 1,
+			description: "Cras justo odio Task",
+			isComplete: false
+		},
+		{
+			id: 2,
+			description: "Cras justo odio Task 2",
+			isComplete: false
+		},
+	]);
+	
 	const [inputVal, setInputVal] = useState("");
 
 	// const toDoListData = [
-		// {
-		// 	id: 1,
-		// 	description: "Cras justo odio Task",
-		// 	isComplete: false
-		// },
-		// {
-		// 	id: 2,
-		// 	description: "Cras justo odio Task 2",
-		// 	isComplete: false
-		// },
+	// {
+	// 	id: 1,
+	// 	description: "Cras justo odio Task",
+	// 	isComplete: false
+	// },
+	// {
+	// 	id: 2,
+	// 	description: "Cras justo odio Task 2",
+	// 	isComplete: false
+	// },
 	// ];
 
 	const addTask = () => {
@@ -38,6 +50,8 @@ function App() {
 
 	const getInputVal = (event) => setInputVal(event.target.value);
 
+	
+
 	return (
 		<div className="App text-white">
 			<div className='to-do-list bg-gray w-25 p-4'>
@@ -56,7 +70,17 @@ function App() {
 				<ListGroup>
 					{toDoList.map((list, index) => {
 						return (
-							<ListGroup.Item key={index} className="list-item">{list.description} <CloseButton /></ListGroup.Item>
+							<ListGroup.Item key={index} className="list-item">
+								<div key={`default-${index}`}>
+									<Form.Check
+										className="line-through"
+										type={"checkbox"}
+										id={`default-${index}`}
+										label={list.description}
+									/>
+								</div>
+								<CloseButton />
+							</ListGroup.Item>
 						)
 					})}
 					{/* <ListGroup.Item className="list-item">Cras justo odio <CloseButton /></ListGroup.Item> */}
