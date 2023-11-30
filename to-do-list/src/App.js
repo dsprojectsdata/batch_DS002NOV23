@@ -5,20 +5,10 @@ import './App.css';
 
 function App() {
 
-	const [toDoList, setToDoList] = useState([
-		{
-			id: 1,
-			description: "Cras justo odio Task",
-			isComplete: false
-		},
-		{
-			id: 2,
-			description: "Cras justo odio Task 2",
-			isComplete: false
-		},
-	]);
-	
+	const [toDoList, setToDoList] = useState([]);
 	const [inputVal, setInputVal] = useState("");
+
+	const [inc, setInc] = useState(1);
 
 	// const toDoListData = [
 	// {
@@ -33,24 +23,60 @@ function App() {
 	// },
 	// ];
 
-	const addTask = () => {
-
+	const addTask = (event) => {
+		
 		const taskObj = {
-			id: 1,
+			id: inc,
 			description: inputVal,
 			isComplete: false
 		};
-
-		// const arr = [];
-		// arr.push(taskObj);
-		// console.log("Am I here??", inputVal);
-
-		setToDoList([...toDoList, taskObj]);
+		
+		setToDoList([...toDoList, taskObj]); 
+		setInc(inc + 1); 
+		setInputVal("");
 	}
 
 	const getInputVal = (event) => setInputVal(event.target.value);
 
+	const removeTask = (id) => {
+
+		const filterList = toDoList.filter((list) => {
+			if(list.id !== id){
+				return list;
+			}
+		});
+
+		setToDoList(filterList);
+	}
+
+	const toggleCompleteVal = (id) => {
+
+		const updatedArr = toDoList.map((list) => {
+			if(list.id === id){
+				return {...list, isComplete: !list.isComplete};
+			}else{
+				return list;
+			}
+		});
+
+		// console.log("updatedArr >>", updatedArr);
+		setToDoList(updatedArr);
+
+	}
+
+	/*
 	
+	const obj1 = {id: 1, name: "asd", age: 20, location: "jaipur", ....}
+	fatherName: "abcd"
+	const obj2 = {...obj1, fatherName: "abcd", age: 54}
+
+	{..., fathg, age: 54}
+
+	- Add value on enter key
+	- confirm box on click of close button
+	- Edit the task
+
+	*/
 
 	return (
 		<div className="App text-white">
@@ -63,6 +89,7 @@ function App() {
 					</Button>
 					<Form.Control
 						placeholder="Add your task"
+						value={inputVal}
 						onChange={(e) => getInputVal(e)}
 					/>
 				</InputGroup>
@@ -71,15 +98,15 @@ function App() {
 					{toDoList.map((list, index) => {
 						return (
 							<ListGroup.Item key={index} className="list-item">
-								<div key={`default-${index}`}>
-									<Form.Check
-										className="line-through"
-										type={"checkbox"}
-										id={`default-${index}`}
-										label={list.description}
-									/>
-								</div>
-								<CloseButton />
+								<Form.Check
+									className={list.isComplete ? "line-through" : ""}
+									type={"checkbox"}
+									// checked={list.isComplete}
+									id={`check-${index}`}
+									label={list.description}
+									onClick={() => toggleCompleteVal(list.id)}
+								/>
+								<CloseButton onClick={() => removeTask(list.id)} />
 							</ListGroup.Item>
 						)
 					})}
