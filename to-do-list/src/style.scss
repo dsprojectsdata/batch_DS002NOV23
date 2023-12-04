@@ -1,0 +1,13 @@
+$bgColor: #0000FF;
+
+body{
+    background-color: $bgColor !important;
+}
+
+.App{
+    background-color: green;
+    
+    .to-do-list{
+
+    }
+}

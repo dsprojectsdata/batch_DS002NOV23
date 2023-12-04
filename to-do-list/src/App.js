@@ -1,39 +1,27 @@
 import React, { useState } from 'react';
 import { Button, InputGroup, Form, ListGroup, CloseButton } from 'react-bootstrap';
+// import './App.css';
+import './style.scss';
 
-import './App.css';
+let i = 1;
 
 function App() {
 
 	const [toDoList, setToDoList] = useState([]);
 	const [inputVal, setInputVal] = useState("");
 
-	const [inc, setInc] = useState(1);
-
-	// const toDoListData = [
-	// {
-	// 	id: 1,
-	// 	description: "Cras justo odio Task",
-	// 	isComplete: false
-	// },
-	// {
-	// 	id: 2,
-	// 	description: "Cras justo odio Task 2",
-	// 	isComplete: false
-	// },
-	// ];
-
-	const addTask = (event) => {
+	const addTask = () => {
 		
 		const taskObj = {
-			id: inc,
+			id: i,
 			description: inputVal,
 			isComplete: false
 		};
 		
-		setToDoList([...toDoList, taskObj]); 
-		setInc(inc + 1); 
+		setToDoList([...toDoList, taskObj]);
 		setInputVal("");
+
+		i++;
 	}
 
 	const getInputVal = (event) => setInputVal(event.target.value);
@@ -52,11 +40,13 @@ function App() {
 	const toggleCompleteVal = (id) => {
 
 		const updatedArr = toDoList.map((list) => {
-			if(list.id === id){
-				return {...list, isComplete: !list.isComplete};
-			}else{
-				return list;
-			}
+			// if(list.id === id){
+			// 	return {...list, isComplete: !list.isComplete};
+			// }else{
+			// 	return list;
+			// }
+
+			return list.id === id ? {...list, isComplete: !list.isComplete} : list;
 		});
 
 		// console.log("updatedArr >>", updatedArr);
