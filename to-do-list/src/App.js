@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Button, InputGroup, Form, ListGroup, CloseButton } from 'react-bootstrap';
-// import './App.css';
-import './style.scss';
+import ListComp from './ListComp';
+import './App.css';
+// import './style.scss';
 
 let i = 1;
 
@@ -24,49 +25,20 @@ function App() {
 		i++;
 	}
 
-	const getInputVal = (event) => setInputVal(event.target.value);
-
 	const removeTask = (id) => {
 
-		const filterList = toDoList.filter((list) => {
-			if(list.id !== id){
-				return list;
-			}
-		});
+		const filterList = toDoList.filter((list) => list.id !== id && list );
 
 		setToDoList(filterList);
 	}
 
 	const toggleCompleteVal = (id) => {
 
-		const updatedArr = toDoList.map((list) => {
-			// if(list.id === id){
-			// 	return {...list, isComplete: !list.isComplete};
-			// }else{
-			// 	return list;
-			// }
+		const updatedArr = toDoList.map((list) => list.id === id ? {...list, isComplete: !list.isComplete} : list );
 
-			return list.id === id ? {...list, isComplete: !list.isComplete} : list;
-		});
-
-		// console.log("updatedArr >>", updatedArr);
 		setToDoList(updatedArr);
 
 	}
-
-	/*
-	
-	const obj1 = {id: 1, name: "asd", age: 20, location: "jaipur", ....}
-	fatherName: "abcd"
-	const obj2 = {...obj1, fatherName: "abcd", age: 54}
-
-	{..., fathg, age: 54}
-
-	- Add value on enter key
-	- confirm box on click of close button
-	- Edit the task
-
-	*/
 
 	return (
 		<div className="App text-white">
@@ -80,27 +52,16 @@ function App() {
 					<Form.Control
 						placeholder="Add your task"
 						value={inputVal}
-						onChange={(e) => getInputVal(e)}
+						onChange={(event) => setInputVal(event.target.value)}
 					/>
 				</InputGroup>
 
 				<ListGroup>
 					{toDoList.map((list, index) => {
 						return (
-							<ListGroup.Item key={index} className="list-item">
-								<Form.Check
-									className={list.isComplete ? "line-through" : ""}
-									type={"checkbox"}
-									// checked={list.isComplete}
-									id={`check-${index}`}
-									label={list.description}
-									onClick={() => toggleCompleteVal(list.id)}
-								/>
-								<CloseButton onClick={() => removeTask(list.id)} />
-							</ListGroup.Item>
+							<ListComp key={index} list={list} toggleCompleteVal={toggleCompleteVal} removeFn={removeTask} />
 						)
 					})}
-					{/* <ListGroup.Item className="list-item">Cras justo odio <CloseButton /></ListGroup.Item> */}
 				</ListGroup>
 			</div>
 		</div>
