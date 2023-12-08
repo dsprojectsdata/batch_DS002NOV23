@@ -40,6 +40,10 @@ function App() {
 
 	}
 
+	const getChildDesc = (desc) => {
+		console.log("desc >>", desc);
+	}
+
 	return (
 		<div className="App text-white">
 			<div className='to-do-list bg-gray w-25 p-4'>
@@ -59,7 +63,7 @@ function App() {
 				<ListGroup>
 					{toDoList.map((list, index) => {
 						return (
-							<ListComp key={index} list={list} toggleCompleteVal={toggleCompleteVal} removeFn={removeTask} />
+							<ListComp key={index} list={list} toggleCompleteVal={toggleCompleteVal} removeFn={removeTask} getChildDesc={getChildDesc} />
 						)
 					})}
 				</ListGroup>
