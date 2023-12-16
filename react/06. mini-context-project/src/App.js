@@ -4,6 +4,8 @@ import Login from './Pages/Login';
 import Profile from './Pages/Profile';
 import UserContext from './context/UserContext';
 import Order from './Pages/Order';
+import Btn from './Pages/Btn';
+import ContentBox from './Pages/ContentBox';
 
 function App() {
 
@@ -12,12 +14,18 @@ function App() {
 	return (
 		<>
 			{/* // <UserContext.Provider value={{ user, setUser }}> */}
-			<Login />
+			{/* <Login />
 			<br />
 			<Profile />
 			<br />
-			<Order />
+			<Order /> */}
 			{/* </UserContext.Provider> */}
+
+
+			{/* ----2---- */}
+			<Btn />
+			<br />
+			<ContentBox />
 		</>
 	);
 }
