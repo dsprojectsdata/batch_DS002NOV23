@@ -5,7 +5,7 @@ import { incrementNum, decrementNum } from "../redux/features/counterSlice"
 
 const Btn = () => {
 
-    const dispatch =  useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -17,3 +17,8 @@ const Btn = () => {
 }
 
 export default Btn
+
+
+// To call any action -> useDispatch()
+
+// To fetch any data from store -> useSelector()
