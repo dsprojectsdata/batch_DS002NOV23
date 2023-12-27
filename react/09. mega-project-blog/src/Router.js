@@ -5,6 +5,7 @@ import Layout from "./components/Layout/Layout";
 import Profile from "./pages/profile/Profile";
 import AuthLayout from "./components/AuthLayout";
 import AddBlog from "./pages/AddBlog/AddBlog";
+import Signup from "./pages/Singup/Signup";
 
 const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -14,6 +15,7 @@ const routes = createBrowserRouter(
 
                 <Route element={<AuthLayout authentication={false} />}>
                     <Route element={<Login />} path="login" />
+                    <Route element={<Signup /> } path="signup" />
                 </Route>
 
                 <Route element={<AuthLayout />}>
