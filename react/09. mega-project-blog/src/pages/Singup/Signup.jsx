@@ -1,23 +1,35 @@
-import React from 'react'
-import { Button, Form } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Form } from 'react-bootstrap'
 import Input from '../../components/form-component/Input'
 import { useForm } from "react-hook-form"
 import { REQUIRED } from '../../constants'
 import ErrorTag from '../../components/form-component/ErrorTag'
 import instanceAxios from '../../services/base'
+import { Link } from 'react-router-dom'
+import { useDispatch } from "react-redux"
+import { login } from '../../redux/features/AuthSlice'
+import SubmitBtn from '../../components/form-component/SubmitBtn'
 
 const Signup = () => {
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const dispatch = useDispatch()
+
     const registerUser = async (data) => {
-        console.log(data);
-
-        const response = await instanceAxios.post("/signup", data);
-        console.log("response >>", response);
+        setIsLoading(true);
+        try {
+            const response = await instanceAxios.post("/signup", data)
+            localStorage.setItem("auth", JSON.stringify(response.data.data))
+            dispatch(login(response.data.data))
+        } catch (error) {
+            console.log(error);
+        }finally{
+            setIsLoading(false);
+        }
     }
-
-    // console.log(errors);
 
     return (
         <>
@@ -67,13 +79,11 @@ const Signup = () => {
                             <ErrorTag error={errors.password} />
 
                             <div className='text-center'>
-                                <Button variant="primary" className='px-5 mt-5' size="lg" type="submit">
-                                    Sign Up
-                                </Button>
+                                <SubmitBtn isLoading={isLoading}>Sign Up</SubmitBtn>
                                 <br />
                             </div>
                             <div className='text-center mt-5'>
-                                <p>You don't have an account yet? <a href='#' style={{ color: 'white' }}>Sign in</a></p>
+                                <p>You don't have an account yet? <Link to="/login" style={{ color: 'white' }}>Sign in</Link></p>
                             </div>
                         </div>
                     </Form>

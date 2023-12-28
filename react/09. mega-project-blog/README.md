@@ -13,3 +13,10 @@ Scope of project
 7. Blog Category -> Add/Edit/Delete
 
 -->
+
+
+<!-- 
+
+28dec2023 => Error handle in singup API, Login API
+
+-->

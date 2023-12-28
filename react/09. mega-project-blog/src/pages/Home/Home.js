@@ -3,6 +3,7 @@ import { Button, Card } from 'react-bootstrap'
 
 import bg from '../../assets/images/bg.jpg'
 import blogs from '../../assets/images/blog-img.jpg'
+import { useSelector } from 'react-redux'
 
 const Home = () => {
 
