@@ -8,14 +8,14 @@ import { login } from '../../redux/features/AuthSlice'
 
 const Layout = () => {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    useEffect(() => {
-        const authData = JSON.parse(localStorage.getItem("auth"));
-        if(authData){
-            dispatch(login(authData))
-        }
-    }, []);
+    // useEffect(() => {
+    //     const authData = JSON.parse(localStorage.getItem("auth"));
+    //     if(authData){
+    //         dispatch(login(authData))
+    //     }
+    // }, []);
 
     return (
         <>

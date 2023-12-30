@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import Input from '../../components/form-component/Input'
 import { useForm } from "react-hook-form"
-import { REQUIRED } from '../../constants'
+import { REGISTER_URL, REQUIRED } from '../../constants'
 import ErrorTag from '../../components/form-component/ErrorTag'
 import instanceAxios from '../../services/base'
 import { Link } from 'react-router-dom'
@@ -21,8 +21,7 @@ const Signup = () => {
     const registerUser = async (data) => {
         setIsLoading(true);
         try {
-            const response = await instanceAxios.post("/signup", data)
-            localStorage.setItem("auth", JSON.stringify(response.data.data))
+            const response = await instanceAxios.post(REGISTER_URL, data)
             dispatch(login(response.data.data))
         } catch (error) {
             console.log(error);

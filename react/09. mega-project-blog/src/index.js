@@ -8,15 +8,18 @@ import routes from './Router';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import store from './redux/store';
+import store, { persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<RouterProvider router={routes}>
-				<App />
-			</RouterProvider>
+			<PersistGate loading={null} persistor={persistor}>
+				<RouterProvider router={routes} />
+				{/* </RouterProvider> */}
+					{/* <App /> */}
+			</PersistGate>
 		</Provider>
 	</React.StrictMode>
 );
