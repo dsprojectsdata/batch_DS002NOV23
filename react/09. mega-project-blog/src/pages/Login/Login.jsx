@@ -1,58 +1,75 @@
-import { Form, Button, Container } from 'react-bootstrap';
-import React from 'react'
+import React, { useState } from 'react'
 import Input from '../../components/form-component/Input';
+import SubmitBtn from '../../components/form-component/SubmitBtn';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { LOGIN_URL, REQUIRED } from '../../constants';
+import { Form } from 'react-bootstrap';
+import ErrorTag from '../../components/form-component/ErrorTag';
+import instanceAxios from '../../services/base';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/features/AuthSlice';
 
 export const Login = () => {
 
+    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
+    const { handleSubmit, register, formState: { errors } } = useForm()
 
+    const loginUser = async (data) => {
+        console.log(data);
+        setIsLoading(true)
+        try {
+            const response = await instanceAxios.post(LOGIN_URL, data)
+            dispatch(login(response.data.data))
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
     return (
         <>
-            {/* <Container>
-                <Form className='my-4'>
-
-                    <Input
-                        label="Email address"
-                        type="email"
-                        placeholder="Enter email"
-
-                    />
-
-                    <Input
-                        label="Password"
-                        type="password"
-                        placeholder="Enter Password"
-                    />
-                                        
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form>
-            </Container> */}
-
             <section className='login bg-dark py-5' id='login'>
                 <div className='container'>
                     <h1 className='fw-bold text-center text-white pb-5' style={{ fontSize: '40px' }}>Login</h1>
                     <div className='formbox text-white' style={{ width: '50%', margin: '0 auto' }}>
-                        <Form.Label htmlFor="inputPassword5" className='fw-bold' style={{ fontSize: '20px' }}>Email</Form.Label>
-                        <Form.Control
-                            type="email"
-                            id="inputPassword5"
-                            aria-describedby="passwordHelpBlock"
-                        />
-                        <Form.Label htmlFor="inputPassword5" className='fw-bold mt-4' style={{ fontSize: '20px' }}>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            id="inputPassword5"
-                            aria-describedby="passwordHelpBlock"
-                        />
-                        <div className='checkbox_remb mt-3 text-end'>
-                            {/* <Form.Check aria-label="option 1" className='d-inline me-2' /> */}
-                            {/* <Form.Label htmlFor="inputPassword5" className='fw-bold' style={{ fontSize: '20px', lineHeight: '0' }}>remberme</Form.Label> */}
-                            <a href='#' style={{ color: 'white' }}>Forgot Password</a>
+                        <Form onSubmit={handleSubmit(loginUser)}>
+                            <Input
+                                label="Email"
+                                {...register("email", {
+                                    required: REQUIRED
+                                })}
+                            />
+                            <ErrorTag error={errors.email} />
+
+                            <Input
+                                label="Password"
+                                type="password"
+                                {...register("password", {
+                                    required: REQUIRED,
+                                    minLength: {
+                                        value: 6,
+                                        message: "Min 6 char required"
+                                    }
+                                })}
+                            />
+                            <ErrorTag error={errors.password} />
+
+                            <div className='checkbox_remb mt-3 text-end'>
+                                <a href='#' style={{ color: 'white' }}>Forgot Password</a>
+                            </div>
+
+                            <div className='text-center'>
+                                <SubmitBtn isLoading={isLoading}>
+                                    Login
+                                </SubmitBtn>
+                            </div>
+                        </Form>
+                        <div className='text-center mt-5'>
+                            <p>You don't have an account yet? <Link to='/singup' style={{ color: 'white' }}>Sign up</Link></p>
                         </div>
-                        <div className='text-center'><Button variant="primary" className='px-5 mt-5' size="lg">Login</Button></div>
-                        <div className='text-center mt-5'><p>You don't have an account yet? <a href='#' style={{ color: 'white' }}>Sign up</a></p></div>
                     </div>
                 </div>
             </section>

@@ -3,15 +3,25 @@ import { Form, Button, Container, Row, Image, Col } from 'react-bootstrap';
 import instanceAxios from '../../services/base';
 import { GET_PROFILE_URL } from '../../constants';
 import { useSelector } from 'react-redux';
+import Input from '../../components/form-component/Input';
+import SubmitBtn from '../../components/form-component/SubmitBtn';
 
 const Profile = () => {
 
     const token = useSelector(state => state.auth.token)
 
     const fetchUserData = async () => {
-        const response = await instanceAxios.get(GET_PROFILE_URL)
-        console.log(response);
+        try {
+            const response = await instanceAxios.get(GET_PROFILE_URL)
+        } catch (error) {
+            
+        }
+        
     }
+
+    // headers: {
+    //     "Content-Type": "multipart/form-data"
+    // }
 
     useEffect(() => {
         fetchUserData();
@@ -29,30 +39,26 @@ const Profile = () => {
                         <h2>Welcome Nikhilesh Sharma</h2>
                         <p>Feel free to edit your information below</p>
                         <div className='formbox' style={{ paddingTop: 24 }}>
+
                             <Form.Control type="file" className='mb-3' />
-                            <Form.Label htmlFor="inputPassword5" className='fw-bold' style={{ fontSize: '20px' }}>Full Name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                id="inputPassword5"
-                                aria-describedby="passwordHelpBlock"
+                            
+                            <Input
+                                label="Full Name"
                             />
 
-                            <Form.Label htmlFor="inputPassword5" className='fw-bold mt-4' style={{ fontSize: '20px' }}>Email</Form.Label>
-                            <Form.Control
+                            <Input
+                                label="Email"
                                 type="email"
-                                id="inputPassword5"
-                                aria-describedby="passwordHelpBlock"
+                                disabled
                             />
 
-                            <Form.Label htmlFor="inputPassword5" className='fw-bold mt-4' style={{ fontSize: '20px' }}>Password</Form.Label>
-                            <Form.Control
+                            <Input
+                                label="Password"
                                 type="password"
-                                id="inputPassword5"
-                                aria-describedby="passwordHelpBlock"
                             />
 
                             <div className='text-center'>
-                                <Button variant="primary" className='px-5 mt-5' size="lg">Update</Button><br />
+                                <SubmitBtn>Upload</SubmitBtn>
                             </div>
 
                         </div>

@@ -9,6 +9,7 @@ const instanceAxios =  axios.create({
 
 instanceAxios.interceptors.request.use((config) => {
     const token = store.getState().auth.token;
+    // const token = "13254";
     token && (config.headers.Authorization = `Bearer ${token}`);
 
     return config;
@@ -19,6 +20,11 @@ instanceAxios.interceptors.request.use((config) => {
 instanceAxios.interceptors.response.use((response) => {
     return response;
 }, (error) => {
+    if(error.response.status === 401){
+        localStorage.clear()
+        // window.location.href = process.env.REACT_APP_BASE_URL
+        window.location.href = "http://localhost:3000"
+    }
     return Promise.reject(error)
 })
 

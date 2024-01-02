@@ -6,7 +6,7 @@ const Input = forwardRef(({ label, type = "text", className, ...props }, ref) =>
     const inputId = useId();
 
     return (
-        <Form.Group className={`${className}`} controlId={inputId}>
+        <Form.Group className={`mb-2 ${className}`} controlId={inputId}>
             {label && <Form.Label className='fw-bold' style={{ fontSize: '20px' }} >{label}</Form.Label>}
             <Form.Control type={type} {...props} ref={ref} />
         </Form.Group>
