@@ -24,7 +24,7 @@ const Header = () => {
                             <NavLink style={{ textDecoration: "none" }} to="/signup" className='text-white'>Signup</NavLink>
                         </>}
                         {authStatus && <>
-                            <NavLink style={{ textDecoration: "none" }} to="/add-blog" className='text-white'>Add Blog</NavLink>
+                            <NavLink style={{ textDecoration: "none" }} to="/user/add-blog" className='text-white'>Add Blog</NavLink>
                             <NavLink style={{ textDecoration: "none" }} to="/profile" className='text-white'>{userData?.name}</NavLink>
                             <Logout />
                         </>}
