@@ -1,33 +1,23 @@
-import React, { useRef } from 'react'
+import React, { forwardRef, useRef } from 'react'
 import { Editor } from '@tinymce/tinymce-react';
+import { Form } from 'react-bootstrap';
 
-const TinyMCE = () => {
-
-    const contentRef = useRef(null);
-
-    
-    const handleClick = () => {
-        console.log(contentRef.current.getContent());
-    }
+const TinyMCE = forwardRef(({ label,  ...props }, ref) => {
 
     return (
         <>
+            {label && <Form.Label className='fw-bold' style={{ fontSize: '20px' }} >{label}</Form.Label>}
             <Editor
-                onInit={(evt, editor) => contentRef.current = editor}
+                onInit={(evt, editor) => ref.current = editor}
                 init={{
                     height: 500,
                     menubar: false,
-                    plugins: [
-                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap',
-                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                        'insertdatetime', 'media', 'table', 'preview', 'help', 'wordcount'
-                    ],
                 }}
             />
-
-            <button onClick={handleClick} type='button'>Click Me</button>
         </>
     )
-}
+})
+
+// const TinyMCE = 
 
 export default TinyMCE
