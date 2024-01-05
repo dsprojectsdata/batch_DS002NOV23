@@ -10,7 +10,7 @@ const Select = forwardRef(({ label, options = [], className = "", ...props }, re
             {label && <Form.Label className='fw-bold' style={{ fontSize: '20px' }} >{label}</Form.Label>}
             <Form.Select ref={ref} {...props}>
                 <option value="">{label ? label : "Select a option"}</option>
-                {options && options.map((option) => <option value={option.value}>{option.title}</option>)}
+                {options && options.map((option, index) => <option key={index} value={option.value}>{option.title}</option>)}
             </Form.Select>
         </Form.Group>
     )
