@@ -1,100 +1,52 @@
-import React from 'react'
-import { Card, Button, Container, Row, Col } from 'react-bootstrap'
-import blogs from '../../assets/images/blog-img.jpg'
+import React, { useEffect, useState } from "react";
+import { Card, Button, Container, Row, Col } from "react-bootstrap";
+import blogs from "../../assets/images/blog-img.jpg";
+import { GET_ALL_BLOGS_URL } from "../../constants";
+import instanceAxios from "../../services/base";
+import { Link } from "react-router-dom";
+import Blogcard from "../../components/BlogCard/Blogcard";
 
 const Blogs = () => {
+    const [blogData, setblogData] = useState([]);
+    const getallblogdata = async () => {
+        try {
+            const response = await instanceAxios.get(GET_ALL_BLOGS_URL);
+            setblogData(response?.data?.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        getallblogdata();
+    }, []);
+
     return (
-        <section className='Blog py-5' id='Blog'>
+        <section className="Blog py-5" id="Blog">
             <Container>
-                <h1 className='fw-bold text-center pb-4' style={{ fontSize: '50px' }}>All Blog</h1>
+                <h1 className="fw-bold text-center pb-4" style={{ fontSize: "50px" }}>
+                    All Blog
+                </h1>
                 <Row>
-                    <Col lg={4}>
-                        <Card className='mb-3'>
-                            <Card.Img variant="top" src={blogs} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <Button variant="primary rounded-0" className='px-4 py-2'>Read More</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col lg={4}>
-                        <Card className='mb-3'>
-                            <Card.Img variant="top" src={blogs} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <Button variant="primary rounded-0" className='px-4 py-2'>Read More</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col lg={4}>
-                        <Card className='mb-3'>
-                            <Card.Img variant="top" src={blogs} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <Button variant="primary rounded-0" className='px-4 py-2'>Read More</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-
-                    <Col lg={4}>
-                        <Card className='mb-3'>
-                            <Card.Img variant="top" src={blogs} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <Button variant="primary rounded-0" className='px-4 py-2'>Read More</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-
-                    <Col lg={4}>
-                        <Card className='mb-3'>
-                            <Card.Img variant="top" src={blogs} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <Button variant="primary rounded-0" className='px-4 py-2'>Read More</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-
-                    <Col lg={4}>
-                        <Card className='mb-3'>
-                            <Card.Img variant="top" src={blogs} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <Button variant="primary rounded-0" className='px-4 py-2'>Read More</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-
+                    {blogData.map((data, index) => (
+                        <Col lg={4} key={index}>
+                            <Link to={`/blog-details/${data?.slug}`}>
+                                <Blogcard
+                                    title={data?.title}
+                                    description={data?.short_content}
+                                    image={data?.image}
+                                />
+                            </Link>
+                        </Col>
+                    ))}
                 </Row>
-                <div className='text-center'><Button variant="primary" className='px-5 mt-5' size="lg">Load More</Button></div>
+                <div className="text-center">
+                    <Button variant="primary" className="px-5 mt-5" size="lg">
+                        Load More
+                    </Button>
+                </div>
             </Container>
         </section>
-    )
-}
+    );
+};
 
-export default Blogs
+export default Blogs;

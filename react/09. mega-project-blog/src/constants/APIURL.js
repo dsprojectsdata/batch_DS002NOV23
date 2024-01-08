@@ -6,5 +6,18 @@ const ADD_CATEGORY_URL = "/user/add-category"
 const GET_CATEGORY_URL = "/user/categories"
 const DETETE_CATEGORY_URL = "/user/delete-category/"
 const ADD_BLOG_URL = "/user/add-blog"
+const GET_ALL_BLOGS_URL = "/blogs";
+const BLOG_SINGLE_URL = "/blog-details";
 
-export { REGISTER_URL, GET_PROFILE_URL, LOGIN_URL, UPDATE_PROFILE_URL, ADD_CATEGORY_URL, GET_CATEGORY_URL, DETETE_CATEGORY_URL, ADD_BLOG_URL }
+export { 
+    REGISTER_URL, 
+    GET_PROFILE_URL, 
+    LOGIN_URL, 
+    UPDATE_PROFILE_URL, 
+    ADD_CATEGORY_URL, 
+    GET_CATEGORY_URL, 
+    DETETE_CATEGORY_URL, 
+    ADD_BLOG_URL,
+    GET_ALL_BLOGS_URL,
+    BLOG_SINGLE_URL
+}

@@ -26,7 +26,7 @@ const routes = createBrowserRouter(
                     <Route element={<Categories />} path="user/categories" />
                     <Route element={<AddBlog />} path="user/add-blog" />
                     <Route element={<Blogs />} path="blogs" />
-                    <Route element={<BlogDetails />} path="blog-details" />
+                    <Route element={<BlogDetails />} path="blog-details/:slug" />
                 </Route>
 
             </Route>

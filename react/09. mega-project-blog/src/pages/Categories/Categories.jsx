@@ -1,60 +1,43 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Form, Pagination, Row, Table } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import Input from '../../components/form-component/Input'
-import SubmitBtn from '../../components/form-component/SubmitBtn'
-import { useForm } from 'react-hook-form'
-import { ADD_CATEGORY_URL, GET_CATEGORY_URL, REQUIRED, DETETE_CATEGORY_URL } from '../../constants'
-import ErrorTag from '../../components/form-component/ErrorTag'
+import { Button, Col, Container, Row } from 'react-bootstrap'
+import { GET_CATEGORY_URL } from '../../constants'
 import instanceAxios from '../../services/base'
-import SiteLoader from '../../components/SiteLoader'
+import { errorToast, successToast } from '../../components/ToastAlert'
+import AddCategoryForm from './AddCategoryForm'
+import CategoriesTable from './CategoriesTable'
+import EditCategoryForm from './EditCategoryForm'
+
 
 const Categories = () => {
 
-    const [isLoading, setIsLoading] = useState(false);
     const [isFetching, setIsFetching] = useState(false)
     const [categories, setCategories] = useState(null);
 
-    const { handleSubmit, register, formState: { errors }, reset } = useForm();
+    const [isEdit, setIsEdit] = useState(false);
+    const [currCategory, setCurrCategory] = useState(null)
 
-    const addCategory = async (data) => {
-        setIsLoading(true);
-        try {
-            await instanceAxios.post(ADD_CATEGORY_URL, data);
-            reset()
-            getCategories();
-        } catch (error) {
-
-        } finally {
-            setIsLoading(false);
-        }
-    }
-
-    const getCategories = async () => {
-        setIsFetching(true);
-        try {
-            const response = await instanceAxios.get(GET_CATEGORY_URL)
-            // console.log("response >>", response);
-            setCategories(response.data.data);
-        } catch (error) {
-            
-        } finally{
-            setIsFetching(false);
-        }
-    }
-
-    const deleteCategory = async (id) => {
-        try {
-            const response = await instanceAxios.delete(`${DETETE_CATEGORY_URL}${id}`)
-            getCategories();
-        } catch (error) {
-            
-        }
+    const handleEditClick = (currCategoryObj) => {
+        setIsEdit(true)
+        setCurrCategory(currCategoryObj)
     }
 
     useEffect(() => {
         getCategories();
     }, [])
+
+    // Get Category API
+    const getCategories = async () => {
+        setIsFetching(true);
+        try {
+            const response = await instanceAxios.post(GET_CATEGORY_URL)
+            // console.log("response >>", response);
+            setCategories(response.data.data.categories);
+        } catch (error) {
+
+        } finally {
+            setIsFetching(false);
+        }
+    }
 
     return (
         <>
@@ -65,62 +48,16 @@ const Categories = () => {
                     </div>
                     <Row>
                         <Col md={6}>
-                            <Form className='mt-4' onSubmit={handleSubmit(addCategory)}>
-                                <Input
-                                    label="Title"
-                                    {...register("name", {
-                                        required: REQUIRED
-                                    })}
-                                />
-
-                                <ErrorTag error={errors.name} />
-                                <SubmitBtn isLoading={isLoading}>Add</SubmitBtn>
-                            </Form>
+                            {isEdit ? <EditCategoryForm getCategories={getCategories} currCate={currCategory} /> : <AddCategoryForm getCategories={getCategories} />}
                         </Col>
                         <Col md={6}>
                             {/* {categories && <> */}
-                                <SiteLoader isLoading={isFetching}>
-                                    <Table striped bordered hover className='mt-4 mb-4'>
-                                        <thead>
-                                            <tr>
-                                                <th width="150">#</th>
-                                                <th>Title</th>
-                                                <th width="150">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {/* <tr>
-                                            <td>1</td>
-                                            <td>Jacob</td>
-                                            <td>
-                                                <div style={{ display: "flex", gap: 12 }}>
-                                                    <Link to="/">Edit</Link>
-                                                    <Link to="/">Delete</Link>
-                                                </div>
-                                            </td>
-                                        </tr> */}
-                                            {categories && categories.map((category, index) => (
-                                                <tr key={index}>
-                                                    <td>{index + 1}</td>
-                                                    <td>{category.name}</td>
-                                                    <td>
-                                                        <div style={{ display: "flex", gap: 12 }}>
-                                                            <Button>Edit</Button>
-                                                            <Button variant='danger' onClick={() => deleteCategory(category.id)}>Delete</Button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </Table>
-                                    <Pagination>
-                                        <Pagination.Item active>{1}</Pagination.Item>
-                                        <Pagination.Item>{2}</Pagination.Item>
-                                        <Pagination.Item>{3}</Pagination.Item>
-                                        <Pagination.Item>{4}</Pagination.Item>
-                                        <Pagination.Item>{5}</Pagination.Item>
-                                    </Pagination>
-                                </SiteLoader>
+                            <CategoriesTable
+                                isFetching={isFetching}
+                                getCategories={getCategories}
+                                categories={categories}
+                                handleEditClick={handleEditClick}
+                            />
                             {/* </>} */}
                         </Col>
                     </Row>

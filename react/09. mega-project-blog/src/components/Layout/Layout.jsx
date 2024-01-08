@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
 
 import Header from './Header'
 import Footer from './Footer'
@@ -22,6 +23,7 @@ const Layout = () => {
             <Header />
                 <Outlet />
             <Footer />
+            <ToastContainer />
         </>
     )
 }

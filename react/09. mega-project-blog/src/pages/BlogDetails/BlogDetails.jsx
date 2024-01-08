@@ -1,42 +1,66 @@
-import React from 'react'
-import { Container, Image } from 'react-bootstrap'
+import React, { useEffect, useState } from "react";
+import { Container, Image } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import Moment from "react-moment";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import parse from 'html-react-parser';
+
+import instanceAxios from "../../services/base";
+import { BLOG_SINGLE_URL } from "../../constants";
 
 const BlogDetails = () => {
+    const { slug } = useParams();
+    const [detailsdata, setdetailsdata] = useState();
 
-    const imageSrc = 'https://images.unsplash.com/photo-1432821596592-e2c18b78144f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmxvZ3xlbnwwfHwwfHx8MA%3D%3D'
+    const blogDetails = async () => {
+        try {
+            const response = await instanceAxios.get(`${BLOG_SINGLE_URL}/${slug}`);
+            console.log("response>>", response?.data?.data);
+            setdetailsdata(response?.data?.data);
+        } catch (error) {
+            console.error("Error fetching blog details:", error);
+        }
+    };
+    useEffect(() => {
+        blogDetails();
+    }, []);
 
     const style = {
         sectionStyle: {
             width: 900,
-            margin: "auto"
+            margin: "auto",
         },
         image: {
             width: "auto",
-            maxWidth: "100%"
+            maxWidth: "100%",
         },
         topHeader: {
             display: "flex",
             justifyContent: "space-between",
-        }
-    }
+        },
+    };
 
     return (
         <>
-            <Container className='py-5'>
+            <Container className="py-5">
                 <section style={style.sectionStyle}>
                     <div style={style.topHeader}>
-                        <p>Nov 16 2023</p>
-                        <p>Education</p>
+                        <p style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                            <FaRegCalendarAlt />
+                            <Moment format="MMM D YYYY">{detailsdata?.created_at}</Moment>
+                        </p>
+                        <p>{detailsdata?.category["name"]}</p>
                     </div>
-                    <Image src={imageSrc} style={style.image} />
-                    <h1 className='mt-3 mb-2'>You can have anything you want in Life If You Dress for it</h1>
-                    <div className='content'>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam veritatis, ratione odio animi sed suscipit, fugiat vero in minima nam, porro voluptas laudantium sequi corrupti? Dolor id delectus laboriosam tenetur!</p>
+                    <Image src={detailsdata?.image} style={style.image} />
+                    <h1 className="mt-3 mb-2">{detailsdata?.title}</h1>
+                    <div className="content mt-3">
+                        {detailsdata?.content && parse(detailsdata?.content)}
+                        {/* <p>{detailsdata?.content}</p> */}
                     </div>
                 </section>
             </Container>
         </>
-    )
-}
+    );
+};
 
-export default BlogDetails
+export default BlogDetails;
