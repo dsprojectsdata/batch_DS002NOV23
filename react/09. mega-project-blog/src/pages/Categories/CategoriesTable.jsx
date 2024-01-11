@@ -4,8 +4,9 @@ import { Button, Pagination, Table } from 'react-bootstrap'
 import instanceAxios from '../../services/base'
 import { successToast } from '../../components/ToastAlert'
 import { DETETE_CATEGORY_URL } from '../../constants'
+import SitePagination from '../../components/SitePagination'
 
-const CategoriesTable = ({ isFetching, getCategories, categories, handleEditClick }) => {
+const CategoriesTable = ({ isFetching, getCategories, categories, handleEditClick, DATA_PER_PAGE, currPage, totalCategory, handlePaginationCategory }) => {
 
     // Delete Category API
     const deleteCategory = async (id) => {
@@ -31,7 +32,7 @@ const CategoriesTable = ({ isFetching, getCategories, categories, handleEditClic
                 <tbody>
                     {categories && categories.map((category, index) => (
                         <tr key={index}>
-                            <td>{index + 1}</td>
+                            <td>{((currPage - 1) * DATA_PER_PAGE) + (index + 1)}</td>
                             <td>{category.name}</td>
                             <td>
                                 <div style={{ display: "flex", gap: 12 }}>
@@ -43,13 +44,12 @@ const CategoriesTable = ({ isFetching, getCategories, categories, handleEditClic
                     ))}
                 </tbody>
             </Table>
-            <Pagination>
-                <Pagination.Item active>{1}</Pagination.Item>
-                <Pagination.Item>{2}</Pagination.Item>
-                <Pagination.Item>{3}</Pagination.Item>
-                <Pagination.Item>{4}</Pagination.Item>
-                <Pagination.Item>{5}</Pagination.Item>
-            </Pagination>
+            <SitePagination
+                currPage={currPage}
+                dataPerPage={DATA_PER_PAGE}
+                totalData={totalCategory}
+                handlePagination={handlePaginationCategory}
+            />
         </SiteLoader>
     )
 }

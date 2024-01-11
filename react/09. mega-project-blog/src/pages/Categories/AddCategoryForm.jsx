@@ -4,7 +4,7 @@ import Input from '../../components/form-component/Input'
 import ErrorTag from '../../components/form-component/ErrorTag'
 import SubmitBtn from '../../components/form-component/SubmitBtn'
 import { useForm } from 'react-hook-form'
-import { REQUIRED } from '../../constants'
+import { ADD_CATEGORY_URL, REQUIRED } from '../../constants'
 import { errorToast, successToast } from '../../components/ToastAlert'
 import instanceAxios from '../../services/base'
 
@@ -18,7 +18,7 @@ const AddCategoryForm = ({ getCategories }) => {
     const addCategory = async (data) => {
         setIsLoading(true);
         try {
-            const response = await instanceAxios.post(`asd`, data);
+            const response = await instanceAxios.post(ADD_CATEGORY_URL, data);
             reset()
             getCategories();
             successToast(response.data.message)

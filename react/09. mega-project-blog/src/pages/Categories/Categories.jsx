@@ -16,6 +16,11 @@ const Categories = () => {
     const [isEdit, setIsEdit] = useState(false);
     const [currCategory, setCurrCategory] = useState(null)
 
+    const [currPage, setCurrPage] = useState(1);
+    const [totalCategory, setTotalCategory] = useState(0)
+
+    const DATA_PER_PAGE = 5;
+
     const handleEditClick = (currCategoryObj) => {
         setIsEdit(true)
         setCurrCategory(currCategoryObj)
@@ -25,13 +30,24 @@ const Categories = () => {
         getCategories();
     }, [])
 
+    const handlePaginationCategory = (pageNo) => {
+        console.log(pageNo)
+        getCategories(pageNo)
+    }
+
     // Get Category API
-    const getCategories = async () => {
+    const getCategories = async (pageNo = 1) => {
         setIsFetching(true);
         try {
-            const response = await instanceAxios.post(GET_CATEGORY_URL)
+            const data = {
+                curr_page: pageNo,
+                data_per_page: DATA_PER_PAGE
+            }
+            const response = await instanceAxios.post(GET_CATEGORY_URL, data)
             // console.log("response >>", response);
             setCategories(response.data.data.categories);
+            setTotalCategory(response.data.data.total);
+            setCurrPage(pageNo)
         } catch (error) {
 
         } finally {
@@ -57,6 +73,10 @@ const Categories = () => {
                                 getCategories={getCategories}
                                 categories={categories}
                                 handleEditClick={handleEditClick}
+                                DATA_PER_PAGE={DATA_PER_PAGE}
+                                currPage={currPage}
+                                totalCategory={totalCategory}
+                                handlePaginationCategory={handlePaginationCategory}
                             />
                             {/* </>} */}
                         </Col>
