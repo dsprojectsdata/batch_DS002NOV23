@@ -19,13 +19,13 @@ const routes = createBrowserRouter(
                 <Route element={<AuthLayout authentication={false} />}>
                     <Route element={<Login />} path="login" />
                     <Route element={<Signup /> } path="signup" />
+                    <Route element={<Blogs />} path="blogs" />
                 </Route>
 
                 <Route element={<AuthLayout />}>
                     <Route element={<Profile />} path="profile" />
                     <Route element={<Categories />} path="user/categories" />
                     <Route element={<AddBlog />} path="user/add-blog" />
-                    <Route element={<Blogs />} path="blogs" />
                     <Route element={<BlogDetails />} path="blog-details/:slug" />
                 </Route>
 
